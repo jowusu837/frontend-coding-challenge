@@ -1,0 +1,84 @@
+// Colors
+$color_shark: #2e3236;
+$color_silver_sand: #bcc0c2;
+$color_bombay: #b3b7ba;
+$color_geyser: #dde2e5;
+
+:host {
+  padding: 2.5rem 2.063rem;
+  display: block;
+}
+
+h1 {
+  font-weight: lighter;
+  font-size: 23px;
+  line-height: 1;
+  color: $color_shark;
+  margin: 0 0 2.5rem;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: separate;
+  margin: 0 -1.25rem;
+
+  th {
+    font-size: 10px;
+    line-height: 12px;
+    text-align: left;
+  }
+
+  th, td {
+    max-width: 7.188rem;
+    padding: 0 1.25rem;
+  }
+
+  thead {
+    th {
+      font-weight: lighter;
+      text-transform: uppercase;
+      color: $color_silver_sand;
+      padding-bottom: 2.375rem;
+      vertical-align: top;
+
+      > span {
+        max-width: 50px;
+        display: inline-block;
+
+        &.pull-right {
+          float: right;
+          text-align: right;
+        }
+      }
+    }
+  }
+
+  tbody {
+    color: $color_bombay;
+    th {
+      font-weight: normal;
+    }
+    td {
+      font-weight: normal;
+      font-size: 12px;
+      padding: 0.813rem 1.25rem;
+
+      &.text-big {
+        font-weight: lighter;
+        font-size: 19px;
+      }
+
+      &.darker {
+        color: $color_shark;
+      }
+    }
+  }
+
+  .border-right {
+    border-right: 1px solid $color_geyser;
+  }
+}
+
+.text-right {
+  text-align: right;
+}
