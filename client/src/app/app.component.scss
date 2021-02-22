@@ -41,11 +41,13 @@ table {
       padding-bottom: 2.375rem;
       vertical-align: top;
 
-      > span {
+      app-sortable {
         max-width: 50px;
         display: inline-block;
+      }
 
-        &.pull-right {
+      &.text-right {
+        > app-sortable {
           float: right;
           text-align: right;
         }

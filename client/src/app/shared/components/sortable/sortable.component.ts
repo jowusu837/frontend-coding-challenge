@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-sortable',
@@ -6,18 +6,23 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./sortable.component.scss']
 })
 export class SortableComponent implements OnInit {
+  @Input() active: boolean = false;
+  @Output() onToggle = new EventEmitter<string>();
 
   constructor() {
   }
 
-  sortDirection = SortDirection.ASCENDING;
+  sortDirection = SortDirection.DESCENDING;
 
   get buttonText() {
     return this.sortDirection === SortDirection.ASCENDING ? '&and;' : '&or;';
   }
 
   toggleSortDirection() {
-    this.sortDirection = this.sortDirection === SortDirection.ASCENDING ? SortDirection.DESCENDING : SortDirection.ASCENDING;
+    if (this.active) {
+      this.sortDirection = this.sortDirection === SortDirection.ASCENDING ? SortDirection.DESCENDING : SortDirection.ASCENDING;
+      this.onToggle.emit(this.sortDirection);
+    }
   }
 
   ngOnInit(): void {

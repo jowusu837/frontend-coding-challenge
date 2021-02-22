@@ -2,13 +2,13 @@
 <table *ngIf="tableData">
   <thead>
   <tr>
-    <th><span>Payroll provider</span></th>
-    <th><span>Worker</span></th>
-    <th><span>Compliance score</span></th>
-    <th><span class="pull-right">Gross pay (&pound;)</span></th>
-    <th><span class="pull-right">Payroll admin (&pound;)</span></th>
-    <th><span class="pull-right">Labour cost (&pound;)</span></th>
-    <th><span>Work force</span></th>
+    <th><app-sortable [active]="sortColumn === 1" (onToggle)="sortByPayrollProvider($event)">Payroll provider</app-sortable></th>
+    <th><app-sortable [active]="sortColumn === 2">Worker</app-sortable></th>
+    <th><app-sortable [active]="sortColumn === 3">Compliance score</app-sortable></th>
+    <th class="text-right"><app-sortable [active]="sortColumn === 4">Gross pay (&pound;)</app-sortable></th>
+    <th class="text-right"><app-sortable [active]="sortColumn === 5">Payroll admin (&pound;)</app-sortable></th>
+    <th class="text-right"><app-sortable [active]="sortColumn === 6">Labour cost (&pound;)</app-sortable></th>
+    <th><app-sortable [active]="sortColumn === 7">Work force</app-sortable></th>
   </tr>
   </thead>
   <tbody>
