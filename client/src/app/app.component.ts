@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {map} from 'rxjs/operators';
-import {BackendService} from "../services/backend.service";
 import {Observable} from "rxjs";
+import {BackendService} from "./shared/services/backend.service";
 
 @Component({
   selector: 'app-root',
