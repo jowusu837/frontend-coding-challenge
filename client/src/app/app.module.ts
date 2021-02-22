@@ -4,10 +4,12 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {BackendService} from "../services/backend.service";
+import { SortableDirective } from './sortable.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SortableDirective
   ],
   imports: [
     BrowserModule,
