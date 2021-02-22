@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {map} from 'rxjs/operators';
 import {Observable} from "rxjs";
-import {BackendService} from "./shared/services/backend.service";
+import {BackendService, LabourStats, Stats} from "./shared/services/backend.service";
 
 @Component({
   selector: 'app-root',
@@ -9,18 +8,22 @@ import {BackendService} from "./shared/services/backend.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  data$: Observable<{ total: any; items: any[] }> | undefined;
+  private data$: Observable<LabourStats>;
+  tableData: Stats[] = [];
+  total: Stats | undefined;
+  fixedTableRows: Stats[] = [];
 
   constructor(private backendService: BackendService) {
+    this.data$ = this.backendService.getLabourStats();
   }
 
   ngOnInit(): void {
-    this.data$ = this.backendService.getLabourStats()
-      .pipe(
-        map(res => ({
-          items: [...res.directContractors, ...res.providers],
-          total: res.total[0]
-        }))
-      )
+    this.data$.subscribe(res => this.sortByPayrollProvider(res))
+  }
+
+  sortByPayrollProvider(stats: LabourStats) {
+    this.fixedTableRows = stats.directContractors;
+    this.tableData = stats.providers;
+    this.total = stats.total[0];
   }
 }

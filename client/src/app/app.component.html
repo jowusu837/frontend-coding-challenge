@@ -1,5 +1,5 @@
 <h1>Labour cost report</h1>
-<table *ngIf="data$ | async as data">
+<table *ngIf="tableData">
   <thead>
   <tr>
     <th><span>Payroll provider</span></th>
@@ -12,7 +12,21 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of data.items">
+  <ng-template [ngIf]="fixedTableRows">
+    <tr *ngFor="let item of fixedTableRows">
+      <th>{{ item.name }}</th>
+      <td class="text-big">{{ item.workerCount | number }}</td>
+      <td class="border-right"></td>
+      <td class="text-big text-right">{{ item.grossPayTotal | number }}</td>
+      <td class="text-right">{{ item.payrollAdminTotal }}</td>
+      <td class="text-big darker text-right border-right">{{ item.labourCostTotal | number }}</td>
+      <td>{{ item.workerCount | percent }}</td>
+    </tr>
+    <tr>
+      <td colspan="7"></td>
+    </tr>
+  </ng-template>
+  <tr *ngFor="let item of tableData">
     <th>{{ item.name }}</th>
     <td class="text-big">{{ item.workerCount | number }}</td>
     <td class="border-right"></td>

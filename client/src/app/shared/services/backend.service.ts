@@ -14,7 +14,29 @@ export class BackendService {
 }
 
 export interface LabourStats {
-  providers: Array<any>,
-  directContractors: Array<any>,
-  total: Array<any>
+  providers: Array<Stats>,
+  directContractors: Array<Stats>,
+  total: Array<Stats>
+}
+
+export interface ComplianceStats {
+  OpsEmpStatusChecked: number,
+  Total: number,
+  TaxStatus: number,
+  Identification: number,
+  RightToWork: number,
+  OpsChecked: number,
+  Contract: number,
+  EmpStatusReview: number
+}
+
+export interface Stats {
+  rebatesTotal: number,
+  grossPayTotal: number,
+  workerCount: number,
+  complianceStats: ComplianceStats,
+  payrollAdminTotal: number,
+  labourCostTotal: number,
+  providerId: number,
+  name: string
 }
