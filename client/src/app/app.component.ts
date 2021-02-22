@@ -10,7 +10,7 @@ import {BackendService, LabourStats, Stats} from "./shared/services/backend.serv
 export class AppComponent implements OnInit {
   private data$: Observable<LabourStats>;
   tableData: Stats[] = [];
-  total: Stats | undefined;
+  total: Stats[] = [];
   fixedTableRows: Stats[] = [];
 
   constructor(private backendService: BackendService) {
@@ -24,6 +24,6 @@ export class AppComponent implements OnInit {
   sortByPayrollProvider(stats: LabourStats) {
     this.fixedTableRows = stats.directContractors;
     this.tableData = stats.providers;
-    this.total = stats.total[0];
+    this.total = stats.total;
   }
 }
