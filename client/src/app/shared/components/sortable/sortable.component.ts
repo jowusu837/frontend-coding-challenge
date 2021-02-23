@@ -19,10 +19,8 @@ export class SortableComponent implements OnInit {
   }
 
   toggleSortDirection() {
-    if (this.active) {
-      this.sortDirection = this.sortDirection === SortDirection.ASCENDING ? SortDirection.DESCENDING : SortDirection.ASCENDING;
-      this.onToggle.emit(this.sortDirection);
-    }
+    this.sortDirection = this.sortDirection === SortDirection.ASCENDING ? SortDirection.DESCENDING : SortDirection.ASCENDING;
+    this.onToggle.emit(this.sortDirection);
   }
 
   ngOnInit(): void {

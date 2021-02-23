@@ -2,13 +2,31 @@
 <table *ngIf="tableData">
   <thead>
   <tr>
-    <th><app-sortable [active]="sortColumn === 1" (onToggle)="sortByPayrollProvider($event)">Payroll provider</app-sortable></th>
-    <th><app-sortable [active]="sortColumn === 2">Worker</app-sortable></th>
-    <th><app-sortable [active]="sortColumn === 3">Compliance score</app-sortable></th>
-    <th class="text-right"><app-sortable [active]="sortColumn === 4">Gross pay (&pound;)</app-sortable></th>
-    <th class="text-right"><app-sortable [active]="sortColumn === 5">Payroll admin (&pound;)</app-sortable></th>
-    <th class="text-right"><app-sortable [active]="sortColumn === 6">Labour cost (&pound;)</app-sortable></th>
-    <th><app-sortable [active]="sortColumn === 7">Work force</app-sortable></th>
+    <th>
+      <app-sortable [active]="sortColumn === 1" (onToggle)="sortByPayrollProvider($event)">Payroll provider
+      </app-sortable>
+    </th>
+    <th>
+      <app-sortable [active]="sortColumn === 2" (onToggle)="sortByWorker($event)">Worker</app-sortable>
+    </th>
+    <th>
+      <app-sortable [active]="sortColumn === 3" (onToggle)="sortByComplianceScore($event)">Compliance score
+      </app-sortable>
+    </th>
+    <th class="text-right">
+      <app-sortable [active]="sortColumn === 4" (onToggle)="sortByGrossPay($event)">Gross pay (&pound;)</app-sortable>
+    </th>
+    <th class="text-right">
+      <app-sortable [active]="sortColumn === 5" (onToggle)="sortByPayrollAdmin($event)">Payroll admin (&pound;)
+      </app-sortable>
+    </th>
+    <th class="text-right">
+      <app-sortable [active]="sortColumn === 6" (onToggle)="sortByLabourCost($event)">Labour cost (&pound;)
+      </app-sortable>
+    </th>
+    <th>
+      <app-sortable [active]="sortColumn === 7" (onToggle)="sortByWorkForce($event)">Work force</app-sortable>
+    </th>
   </tr>
   </thead>
   <tbody>
@@ -16,11 +34,11 @@
     <tr *ngFor="let item of fixedTableRows">
       <th>{{ item.name }}</th>
       <td class="text-big">{{ item.workerCount | number }}</td>
-      <td class="border-right"></td>
-      <td class="text-big text-right">{{ item.grossPayTotal | number }}</td>
-      <td class="text-right">{{ item.payrollAdminTotal }}</td>
-      <td class="text-big darker text-right border-right">{{ item.labourCostTotal | number }}</td>
-      <td>{{ item.workerCount | percent }}</td>
+      <td class="border-right">{{ computeComplianceScore(item) | percent }}</td>
+      <td class="text-big text-right">{{ item.grossPayTotal | over100 | number }}</td>
+      <td class="text-right">{{ item.payrollAdminTotal | dash0 }}</td>
+      <td class="text-big darker text-right border-right">{{ item.labourCostTotal | over100 | number }}</td>
+      <td>{{ computeWorkForce(item) | percent }}</td>
     </tr>
     <tr>
       <td colspan="7"></td>
@@ -29,11 +47,11 @@
   <tr *ngFor="let item of tableData">
     <th>{{ item.name }}</th>
     <td class="text-big">{{ item.workerCount | number }}</td>
-    <td class="border-right"></td>
-    <td class="text-big text-right">{{ item.grossPayTotal | number }}</td>
-    <td class="text-right">{{ item.payrollAdminTotal }}</td>
-    <td class="text-big darker text-right border-right">{{ item.labourCostTotal | number }}</td>
-    <td>{{ item.workerCount | percent }}</td>
+    <td class="border-right">{{ computeComplianceScore(item) | percent }}</td>
+    <td class="text-big text-right">{{ item.grossPayTotal | over100 | number }}</td>
+    <td class="text-right">{{ item.payrollAdminTotal | dash0 }}</td>
+    <td class="text-big darker text-right border-right">{{ item.labourCostTotal | over100 | number }}</td>
+    <td>{{ computeWorkForce(item) | percent: '1.1' }}</td>
   </tr>
   </tbody>
 </table>
