@@ -22,6 +22,11 @@ table {
   border-collapse: separate;
   margin: 0 -1.25rem;
 
+  .text-big {
+    font-size: 19px;
+    font-weight: lighter;
+  }
+
   th {
     font-size: 10px;
     line-height: 12px;
@@ -65,14 +70,20 @@ table {
       font-size: 12px;
       padding: 0.813rem 1.25rem;
 
-      &.text-big {
-        font-weight: lighter;
-        font-size: 19px;
-      }
-
       &.darker {
         color: $color_shark;
       }
+    }
+  }
+
+  tfoot {
+    th {
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    td:not(.text-big) {
+      font-size: 12px;
     }
   }
 
