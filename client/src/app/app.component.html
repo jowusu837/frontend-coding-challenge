@@ -35,9 +35,9 @@
       <th>{{ item.name }}</th>
       <td class="text-big">{{ item.workerCount | number }}</td>
       <td class="border-right">{{ computeComplianceScore(item) | percent }}</td>
-      <td class="text-big text-right">{{ item.grossPayTotal | over100 | number }}</td>
+      <td class="text-big text-right text-darker">{{ item.grossPayTotal | over100 | number }}</td>
       <td class="text-right">{{ item.payrollAdminTotal | dash0 }}</td>
-      <td class="text-big darker text-right border-right">{{ item.labourCostTotal | over100 | number }}</td>
+      <td class="text-big text-right border-right">{{ item.labourCostTotal | over100 | number }}</td>
       <td>{{ computeWorkForce(item) | percent }}</td>
     </tr>
     <tr>
@@ -48,9 +48,9 @@
     <th>{{ item.name }}</th>
     <td class="text-big">{{ item.workerCount | number }}</td>
     <td class="border-right">{{ computeComplianceScore(item) | percent }}</td>
-    <td class="text-big text-right">{{ item.grossPayTotal | over100 | number }}</td>
+    <td class="text-big text-right text-darker">{{ item.grossPayTotal | over100 | number }}</td>
     <td class="text-right">{{ item.payrollAdminTotal | dash0 }}</td>
-    <td class="text-big darker text-right border-right">{{ item.labourCostTotal | over100 | number }}</td>
+    <td class="text-big text-right border-right">{{ item.labourCostTotal | over100 | number }}</td>
     <td>{{ computeWorkForce(item) | percent: '1.1' }}</td>
   </tr>
   <tr>

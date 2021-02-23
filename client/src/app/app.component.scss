@@ -66,11 +66,14 @@ table {
       font-weight: normal;
     }
     td {
-      font-weight: normal;
-      font-size: 12px;
       padding: 0.813rem 1.25rem;
 
-      &.darker {
+      &:not(.text-big) {
+        font-weight: normal;
+        font-size: 12px;
+      }
+
+      &.text-darker {
         color: $color_shark;
       }
     }
