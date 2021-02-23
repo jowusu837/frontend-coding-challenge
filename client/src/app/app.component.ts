@@ -9,23 +9,23 @@ import {SortDirection} from "./shared/components/sortable/sortable.component";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  private data$: Observable<LabourStats>;
+  private labourStats$: Observable<LabourStats>;
   tableData: Stats[] = [];
   total: Stats[] = [];
   fixedTableRows: Stats[] = [];
   sortedColumn = 1;
 
   constructor(private backendService: BackendService) {
-    this.data$ = this.backendService.getLabourStats();
+    this.labourStats$ = this.backendService.getLabourStats();
   }
 
   ngOnInit(): void {
-    this.data$.subscribe(() => this.sortByPayrollProvider(SortDirection.DESCENDING))
+    this.labourStats$.subscribe(() => this.sortByPayrollProvider(SortDirection.DESCENDING))
   }
 
   sortByPayrollProvider(sortDirection: string) {
     const sortFn = (a: Stats, b: Stats) => sortDirection === SortDirection.ASCENDING ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
-    this.data$.subscribe(stats => {
+    this.labourStats$.subscribe(stats => {
       this.fixedTableRows = stats.directContractors;
       this.tableData = stats.providers.sort(sortFn);
       this.total = stats.total;
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
 
   sortByWorker(sortDirection: string) {
     const sortFn = (a: Stats, b: Stats) => sortDirection === SortDirection.ASCENDING ? a.workerCount - b.workerCount : b.workerCount - a.workerCount;
-    this.data$.subscribe(stats => {
+    this.labourStats$.subscribe(stats => {
       this.fixedTableRows = [];
       this.tableData = [...stats.directContractors, ...stats.providers].sort(sortFn);
       this.sortedColumn = 2;
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
 
   sortByComplianceScore(sortDirection: string) {
     const sortFn = (a: Stats, b: Stats) => sortDirection === SortDirection.ASCENDING ? this.computeComplianceScore(a) - this.computeComplianceScore(b) : this.computeComplianceScore(b) - this.computeComplianceScore(a);
-    this.data$.subscribe(stats => {
+    this.labourStats$.subscribe(stats => {
       this.fixedTableRows = [];
       this.tableData = [...stats.directContractors, ...stats.providers].sort(sortFn);
       this.sortedColumn = 3;
@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
 
   sortByGrossPay(sortDirection: string) {
     const sortFn = (a: Stats, b: Stats) => sortDirection === SortDirection.ASCENDING ? a.grossPayTotal - b.grossPayTotal : b.grossPayTotal - a.grossPayTotal;
-    this.data$.subscribe(stats => {
+    this.labourStats$.subscribe(stats => {
       this.fixedTableRows = [];
       this.tableData = [...stats.directContractors, ...stats.providers].sort(sortFn);
       this.sortedColumn = 4;
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
 
   sortByPayrollAdmin(sortDirection: string) {
     const sortFn = (a: Stats, b: Stats) => sortDirection === SortDirection.ASCENDING ? a.payrollAdminTotal - b.payrollAdminTotal : b.payrollAdminTotal - a.payrollAdminTotal;
-    this.data$.subscribe(stats => {
+    this.labourStats$.subscribe(stats => {
       this.fixedTableRows = [];
       this.tableData = [...stats.directContractors, ...stats.providers].sort(sortFn);
       this.sortedColumn = 5;
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
 
   sortByLabourCost(sortDirection: string) {
     const sortFn = (a: Stats, b: Stats) => sortDirection === SortDirection.ASCENDING ? a.labourCostTotal - b.labourCostTotal : b.labourCostTotal - a.labourCostTotal;
-    this.data$.subscribe(stats => {
+    this.labourStats$.subscribe(stats => {
       this.fixedTableRows = [];
       this.tableData = [...stats.directContractors, ...stats.providers].sort(sortFn);
       this.sortedColumn = 6;
@@ -80,7 +80,7 @@ export class AppComponent implements OnInit {
 
   sortByWorkForce(sortDirection: string) {
     const sortFn = (a: Stats, b: Stats) => sortDirection === SortDirection.ASCENDING ? this.computeWorkForce(a) - this.computeWorkForce(b) : this.computeWorkForce(b) - this.computeWorkForce(a);
-    this.data$.subscribe(stats => {
+    this.labourStats$.subscribe(stats => {
       this.fixedTableRows = [];
       this.tableData = [...stats.directContractors, ...stats.providers].sort(sortFn);
       this.sortedColumn = 7;
