@@ -50,11 +50,6 @@ table {
       padding-bottom: 2.375rem;
       vertical-align: top;
 
-      app-sortable {
-        max-width: 60px;
-        display: inline-block;
-      }
-
       &.text-right {
         > app-sortable {
           float: right;

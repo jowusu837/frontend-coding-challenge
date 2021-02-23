@@ -1,6 +1,8 @@
 $color_contessa: #c56f6f;
 
 .wrapper {
+  display: flex;
+  align-items: center;
   cursor: pointer;
 
   .icon {
