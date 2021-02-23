@@ -3,55 +3,55 @@
   <thead>
   <tr>
     <th>
-      <app-sortable [active]="sortColumn === 1" (onToggle)="sortByPayrollProvider($event)">Payroll provider
+      <app-sortable [active]="sortedColumn === 1" (onToggle)="sortByPayrollProvider($event)">Payroll provider
       </app-sortable>
     </th>
     <th>
-      <app-sortable [active]="sortColumn === 2" (onToggle)="sortByWorker($event)">Worker</app-sortable>
+      <app-sortable [active]="sortedColumn === 2" (onToggle)="sortByWorker($event)">Worker</app-sortable>
     </th>
     <th>
-      <app-sortable [active]="sortColumn === 3" (onToggle)="sortByComplianceScore($event)">Compliance score
+      <app-sortable [active]="sortedColumn === 3" (onToggle)="sortByComplianceScore($event)">Compliance score
       </app-sortable>
     </th>
     <th class="text-right">
-      <app-sortable [active]="sortColumn === 4" (onToggle)="sortByGrossPay($event)">Gross pay (&pound;)</app-sortable>
+      <app-sortable [active]="sortedColumn === 4" (onToggle)="sortByGrossPay($event)">Gross pay (&pound;)</app-sortable>
     </th>
     <th class="text-right">
-      <app-sortable [active]="sortColumn === 5" (onToggle)="sortByPayrollAdmin($event)">Payroll admin (&pound;)
+      <app-sortable [active]="sortedColumn === 5" (onToggle)="sortByPayrollAdmin($event)">Payroll admin (&pound;)
       </app-sortable>
     </th>
     <th class="text-right">
-      <app-sortable [active]="sortColumn === 6" (onToggle)="sortByLabourCost($event)">Labour cost (&pound;)
+      <app-sortable [active]="sortedColumn === 6" (onToggle)="sortByLabourCost($event)">Labour cost (&pound;)
       </app-sortable>
     </th>
     <th>
-      <app-sortable [active]="sortColumn === 7" (onToggle)="sortByWorkForce($event)">Work force</app-sortable>
+      <app-sortable [active]="sortedColumn === 7" (onToggle)="sortByWorkForce($event)">Work force</app-sortable>
     </th>
   </tr>
   </thead>
   <tbody>
   <ng-template [ngIf]="fixedTableRows">
     <tr *ngFor="let item of fixedTableRows">
-      <th>{{ item.name }}</th>
-      <td class="text-big">{{ item.workerCount | number }}</td>
-      <td class="border-right">{{ computeComplianceScore(item) | percent }}</td>
-      <td class="text-big text-right text-darker">{{ item.grossPayTotal | over100 | number }}</td>
-      <td class="text-right">{{ item.payrollAdminTotal | dash0 }}</td>
-      <td class="text-big text-right border-right">{{ item.labourCostTotal | over100 | number }}</td>
-      <td>{{ computeWorkForce(item) | percent }}</td>
+      <th [ngClass]="getClassesForColumn(1)">{{ item.name }}</th>
+      <td [ngClass]="getClassesForColumn(2, false, true)">{{ item.workerCount | number }}</td>
+      <td [ngClass]="getClassesForColumn(3, true)">{{ computeComplianceScore(item) | percent }}</td>
+      <td [ngClass]="getClassesForColumn(4, false, true, true)">{{ item.grossPayTotal | over100 | number }}</td>
+      <td [ngClass]="getClassesForColumn(5, false, false, true)">{{ item.payrollAdminTotal | dash0 }}</td>
+      <td [ngClass]="getClassesForColumn(6, true, true, true)">{{ item.labourCostTotal | over100 | number }}</td>
+      <td [ngClass]="getClassesForColumn(7)">{{ computeWorkForce(item) | percent }}</td>
     </tr>
     <tr>
       <td colspan="7"></td>
     </tr>
   </ng-template>
   <tr *ngFor="let item of tableData">
-    <th>{{ item.name }}</th>
-    <td class="text-big">{{ item.workerCount | number }}</td>
-    <td class="border-right">{{ computeComplianceScore(item) | percent }}</td>
-    <td class="text-big text-right text-darker">{{ item.grossPayTotal | over100 | number }}</td>
-    <td class="text-right">{{ item.payrollAdminTotal | dash0 }}</td>
-    <td class="text-big text-right border-right">{{ item.labourCostTotal | over100 | number }}</td>
-    <td>{{ computeWorkForce(item) | percent: '1.1' }}</td>
+    <th [ngClass]="getClassesForColumn(1)">{{ item.name }}</th>
+    <td [ngClass]="getClassesForColumn(2, false, true)">{{ item.workerCount | number }}</td>
+    <td [ngClass]="getClassesForColumn(3, true)">{{ computeComplianceScore(item) | percent }}</td>
+    <td [ngClass]="getClassesForColumn(4, false, true, true)">{{ item.grossPayTotal | over100 | number }}</td>
+    <td [ngClass]="getClassesForColumn(5, false, false, true)">{{ item.payrollAdminTotal | dash0 }}</td>
+    <td [ngClass]="getClassesForColumn(6, true, true, true)">{{ item.labourCostTotal | over100 | number }}</td>
+    <td [ngClass]="getClassesForColumn(7)">{{ computeWorkForce(item) | percent: '1.1' }}</td>
   </tr>
   <tr>
     <td colspan="7"></td>

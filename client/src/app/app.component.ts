@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   tableData: Stats[] = [];
   total: Stats[] = [];
   fixedTableRows: Stats[] = [];
-  sortColumn = 1;
+  sortedColumn = 1;
 
   constructor(private backendService: BackendService) {
     this.data$ = this.backendService.getLabourStats();
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
       this.fixedTableRows = stats.directContractors;
       this.tableData = stats.providers.sort(sortFn);
       this.total = stats.total;
-      this.sortColumn = 1;
+      this.sortedColumn = 1;
     });
   }
 
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
     this.data$.subscribe(stats => {
       this.fixedTableRows = [];
       this.tableData = [...stats.directContractors, ...stats.providers].sort(sortFn);
-      this.sortColumn = 2;
+      this.sortedColumn = 2;
     });
   }
 
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
     this.data$.subscribe(stats => {
       this.fixedTableRows = [];
       this.tableData = [...stats.directContractors, ...stats.providers].sort(sortFn);
-      this.sortColumn = 3;
+      this.sortedColumn = 3;
     });
   }
 
@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
     this.data$.subscribe(stats => {
       this.fixedTableRows = [];
       this.tableData = [...stats.directContractors, ...stats.providers].sort(sortFn);
-      this.sortColumn = 4;
+      this.sortedColumn = 4;
     });
   }
 
@@ -65,7 +65,7 @@ export class AppComponent implements OnInit {
     this.data$.subscribe(stats => {
       this.fixedTableRows = [];
       this.tableData = [...stats.directContractors, ...stats.providers].sort(sortFn);
-      this.sortColumn = 5;
+      this.sortedColumn = 5;
     });
   }
 
@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
     this.data$.subscribe(stats => {
       this.fixedTableRows = [];
       this.tableData = [...stats.directContractors, ...stats.providers].sort(sortFn);
-      this.sortColumn = 6;
+      this.sortedColumn = 6;
     });
   }
 
@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
     this.data$.subscribe(stats => {
       this.fixedTableRows = [];
       this.tableData = [...stats.directContractors, ...stats.providers].sort(sortFn);
-      this.sortColumn = 7;
+      this.sortedColumn = 7;
     });
   }
 
@@ -93,5 +93,14 @@ export class AppComponent implements OnInit {
 
   computeWorkForce(stats: Stats) {
     return (stats.workerCount / this.total[0].workerCount);
+  }
+
+  getClassesForColumn(columnIndex: number, borderRight = false, textBig = false, textRight = false) {
+    return {
+      'border-right': borderRight,
+      'text-darker': this.sortedColumn === columnIndex,
+      'text-big': textBig,
+      'text-right': textRight
+    };
   }
 }
