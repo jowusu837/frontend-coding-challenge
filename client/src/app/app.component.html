@@ -1,71 +1,73 @@
 <h1>Labour cost report</h1>
-<table *ngIf="tableData">
-  <thead>
-  <tr>
-    <th>
-      <app-sortable [active]="sortedColumn === 1" (onToggle)="sortByPayrollProvider($event)">Payroll<br>provider
-      </app-sortable>
-    </th>
-    <th>
-      <app-sortable [active]="sortedColumn === 2" (onToggle)="sortByWorker($event)">Worker</app-sortable>
-    </th>
-    <th>
-      <app-sortable [active]="sortedColumn === 3" (onToggle)="sortByComplianceScore($event)">Compliance<br>score
-      </app-sortable>
-    </th>
-    <th class="text-right">
-      <app-sortable [active]="sortedColumn === 4" (onToggle)="sortByGrossPay($event)">Gross<br>pay (&pound;)</app-sortable>
-    </th>
-    <th class="text-right">
-      <app-sortable [active]="sortedColumn === 5" (onToggle)="sortByPayrollAdmin($event)">Payroll<br>admin (&pound;)
-      </app-sortable>
-    </th>
-    <th class="text-right">
-      <app-sortable [active]="sortedColumn === 6" (onToggle)="sortByLabourCost($event)">Labour<br>cost (&pound;)
-      </app-sortable>
-    </th>
-    <th>
-      <app-sortable [active]="sortedColumn === 7" (onToggle)="sortByWorkForce($event)">Work<br>force</app-sortable>
-    </th>
-  </tr>
-  </thead>
-  <tbody>
-  <ng-template [ngIf]="fixedTableRows">
-    <tr *ngFor="let item of fixedTableRows">
+<div class="table-wrapper">
+  <table *ngIf="tableData">
+    <thead>
+    <tr>
+      <th>
+        <app-sortable [active]="sortedColumn === 1" (onToggle)="sortByPayrollProvider($event)">Payroll<br>provider
+        </app-sortable>
+      </th>
+      <th>
+        <app-sortable [active]="sortedColumn === 2" (onToggle)="sortByWorker($event)">Worker</app-sortable>
+      </th>
+      <th>
+        <app-sortable [active]="sortedColumn === 3" (onToggle)="sortByComplianceScore($event)">Compliance<br>score
+        </app-sortable>
+      </th>
+      <th class="text-right">
+        <app-sortable [active]="sortedColumn === 4" (onToggle)="sortByGrossPay($event)">Gross<br>pay (&pound;)</app-sortable>
+      </th>
+      <th class="text-right">
+        <app-sortable [active]="sortedColumn === 5" (onToggle)="sortByPayrollAdmin($event)">Payroll<br>admin (&pound;)
+        </app-sortable>
+      </th>
+      <th class="text-right">
+        <app-sortable [active]="sortedColumn === 6" (onToggle)="sortByLabourCost($event)">Labour<br>cost (&pound;)
+        </app-sortable>
+      </th>
+      <th>
+        <app-sortable [active]="sortedColumn === 7" (onToggle)="sortByWorkForce($event)">Work<br>force</app-sortable>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-template [ngIf]="fixedTableRows">
+      <tr *ngFor="let item of fixedTableRows">
+        <th [ngClass]="getClassesForColumn(1)">{{ item.name }}</th>
+        <td [ngClass]="getClassesForColumn(2, false, true)">{{ item.workerCount | number }}</td>
+        <td [ngClass]="getClassesForColumn(3, true)">{{ computeComplianceScore(item) | percent }}</td>
+        <td [ngClass]="getClassesForColumn(4, false, true, true)">{{ item.grossPayTotal | over100 | number }}</td>
+        <td [ngClass]="getClassesForColumn(5, false, false, true)">{{ item.payrollAdminTotal | dash0 }}</td>
+        <td [ngClass]="getClassesForColumn(6, true, true, true)">{{ item.labourCostTotal | over100 | number }}</td>
+        <td [ngClass]="getClassesForColumn(7)">{{ computeWorkForce(item) | percent }}</td>
+      </tr>
+      <tr>
+        <td colspan="7"></td>
+      </tr>
+    </ng-template>
+    <tr *ngFor="let item of tableData">
       <th [ngClass]="getClassesForColumn(1)">{{ item.name }}</th>
       <td [ngClass]="getClassesForColumn(2, false, true)">{{ item.workerCount | number }}</td>
       <td [ngClass]="getClassesForColumn(3, true)">{{ computeComplianceScore(item) | percent }}</td>
       <td [ngClass]="getClassesForColumn(4, false, true, true)">{{ item.grossPayTotal | over100 | number }}</td>
       <td [ngClass]="getClassesForColumn(5, false, false, true)">{{ item.payrollAdminTotal | dash0 }}</td>
       <td [ngClass]="getClassesForColumn(6, true, true, true)">{{ item.labourCostTotal | over100 | number }}</td>
-      <td [ngClass]="getClassesForColumn(7)">{{ computeWorkForce(item) | percent }}</td>
+      <td [ngClass]="getClassesForColumn(7)">{{ computeWorkForce(item) | percent: '1.1' }}</td>
     </tr>
     <tr>
       <td colspan="7"></td>
     </tr>
-  </ng-template>
-  <tr *ngFor="let item of tableData">
-    <th [ngClass]="getClassesForColumn(1)">{{ item.name }}</th>
-    <td [ngClass]="getClassesForColumn(2, false, true)">{{ item.workerCount | number }}</td>
-    <td [ngClass]="getClassesForColumn(3, true)">{{ computeComplianceScore(item) | percent }}</td>
-    <td [ngClass]="getClassesForColumn(4, false, true, true)">{{ item.grossPayTotal | over100 | number }}</td>
-    <td [ngClass]="getClassesForColumn(5, false, false, true)">{{ item.payrollAdminTotal | dash0 }}</td>
-    <td [ngClass]="getClassesForColumn(6, true, true, true)">{{ item.labourCostTotal | over100 | number }}</td>
-    <td [ngClass]="getClassesForColumn(7)">{{ computeWorkForce(item) | percent: '1.1' }}</td>
-  </tr>
-  <tr>
-    <td colspan="7"></td>
-  </tr>
-  </tbody>
-  <tfoot>
-  <tr>
-    <th>Total</th>
-    <td class="text-big">{{ total[0].workerCount | number }}</td>
-    <td class="border-right">{{ computeComplianceScore(total[0]) | percent }}</td>
-    <td class="text-big text-right">{{ total[0].grossPayTotal | over100 | number }}</td>
-    <td class="text-right">{{ total[0].payrollAdminTotal | dash0 }}</td>
-    <td class="text-big text-right border-right">{{ total[0].labourCostTotal | over100 | number }}</td>
-    <td>{{ computeWorkForce(total[0]) | percent }}</td>
-  </tr>
-  </tfoot>
-</table>
+    </tbody>
+    <tfoot>
+    <tr>
+      <th>Total</th>
+      <td class="text-big">{{ total[0].workerCount | number }}</td>
+      <td class="border-right">{{ computeComplianceScore(total[0]) | percent }}</td>
+      <td class="text-big text-right">{{ total[0].grossPayTotal | over100 | number }}</td>
+      <td class="text-right">{{ total[0].payrollAdminTotal | dash0 }}</td>
+      <td class="text-big text-right border-right">{{ total[0].labourCostTotal | over100 | number }}</td>
+      <td>{{ computeWorkForce(total[0]) | percent }}</td>
+    </tr>
+    </tfoot>
+  </table>
+</div>

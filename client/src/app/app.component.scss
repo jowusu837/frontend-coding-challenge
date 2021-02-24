@@ -17,10 +17,14 @@ h1 {
   margin: 0 0 2.5rem;
 }
 
+.table-wrapper {
+  margin: 0 -1.25rem;
+  overflow-x: auto;
+}
+
 table {
   border-spacing: 0;
   border-collapse: separate;
-  margin: 0 -1.25rem;
 
   .text-big {
     font-size: 19px;
