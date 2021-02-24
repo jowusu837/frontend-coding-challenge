@@ -1,4 +1,4 @@
 <span class="wrapper" (click)="toggleSortDirection()">
   <span><ng-content></ng-content></span>
-  <span *ngIf="active" class="icon" [innerHTML]="buttonText"></span>
+  <span [ngClass]="{'icon': true, 'visible': active}" [innerHTML]="caret"></span>
 </span>

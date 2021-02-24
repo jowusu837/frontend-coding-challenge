@@ -14,7 +14,7 @@ export class SortableComponent implements OnInit {
 
   sortDirection = SortDirection.DESCENDING;
 
-  get buttonText() {
+  get caret() {
     return this.sortDirection === SortDirection.ASCENDING ? '&and;' : '&or;';
   }
 

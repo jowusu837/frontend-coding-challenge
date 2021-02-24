@@ -52,6 +52,7 @@ table {
       text-transform: uppercase;
       color: $color_silver_sand;
       padding-bottom: 2.375rem;
+      padding-right: calc(1.25rem - 0.417rem);
       vertical-align: top;
 
       &.text-right {

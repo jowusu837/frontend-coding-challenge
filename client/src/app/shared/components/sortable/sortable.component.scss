@@ -8,5 +8,10 @@ $color_contessa: #c56f6f;
   .icon {
     color: $color_contessa;
     margin-left: 3px;
+    visibility: hidden;
+
+    &.visible {
+      visibility: visible;
+    }
   }
 }
