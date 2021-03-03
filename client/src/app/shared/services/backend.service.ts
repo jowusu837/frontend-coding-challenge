@@ -13,30 +13,41 @@ export class BackendService {
 
 }
 
-export interface LabourStats {
-  providers: Array<Stats>,
-  directContractors: Array<Stats>,
-  total: Array<Stats>
+export class LabourStats {
+  constructor(
+    public providers: Array<Stats> = [],
+    public directContractors: Array<Stats> = [],
+    public total: Array<Stats> = []
+  ) {
+  }
 }
 
-export interface ComplianceStats {
-  OpsEmpStatusChecked: number,
-  Total: number,
-  TaxStatus: number,
-  Identification: number,
-  RightToWork: number,
-  OpsChecked: number,
-  Contract: number,
-  EmpStatusReview: number
+export class ComplianceStats {
+  constructor(
+    public OpsEmpStatusChecked = 0,
+    public Total = 0,
+    public TaxStatus = 0,
+    public Identification = 0,
+    public RightToWork = 0,
+    public OpsChecked = 0,
+    public Contract = 0,
+    public EmpStatusReview = 0
+  ) {
+  }
+
 }
 
-export interface Stats {
-  rebatesTotal: number,
-  grossPayTotal: number,
-  workerCount: number,
-  complianceStats: ComplianceStats,
-  payrollAdminTotal: number,
-  labourCostTotal: number,
-  providerId: number,
-  name: string
+export class Stats {
+  constructor(
+    public rebatesTotal = 0,
+    public grossPayTotal = 0,
+    public workerCount = 0,
+    public complianceStats = new ComplianceStats(),
+    public payrollAdminTotal = 0,
+    public labourCostTotal = 0,
+    public providerId = 0,
+    public name = ''
+  ) {
+  }
+
 }

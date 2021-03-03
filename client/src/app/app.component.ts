@@ -11,7 +11,9 @@ import {SortDirection} from "./shared/components/sortable/sortable.component";
 export class AppComponent implements OnInit {
   private labourStats$: Observable<LabourStats>;
   tableData: Stats[] = [];
-  total: Stats[] = [];
+  total: Stats[] = [
+    new Stats()
+  ];
   fixedTableRows: Stats[] = [];
   sortedColumn = 1;
 
